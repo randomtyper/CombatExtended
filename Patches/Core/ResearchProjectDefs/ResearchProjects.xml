@@ -29,9 +29,6 @@
 	</Operation>
 	
 	<!-- Remove Sniper & Autoturret -->
-	<Operation Class="PatchOperationRemove">
-		<xpath>Defs/ResearchProjectDef[defName="HeavyTurrets"]</xpath>
-	</Operation>
 	
 	<Operation Class="PatchOperationRemove">
 		<xpath>Defs/ResearchProjectDef[defName="SniperTurret"]</xpath>

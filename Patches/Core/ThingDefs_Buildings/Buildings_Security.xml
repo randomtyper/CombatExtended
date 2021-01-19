@@ -139,10 +139,56 @@
 
 	<!-- ========== Autocannon turret ========== -->
 
-	<Operation Class="PatchOperationRemove">
+	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
 	</Operation>
-	
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.45</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/statBases/ShootingAccuracyTurret</xpath>
+		<value>
+			<ShootingAccuracyTurret>0.5</ShootingAccuracyTurret>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/statBases</xpath>
+		<value>
+			<Mass>100</Mass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/comps/li[@Class = "CompProperties_Explosive"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/comps/li[@Class = "CompProperties_Refuelable"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]</xpath>
+		<value>
+			<fillPercent>1</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Turret_Autocannon"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>1.1</turretBurstCooldownTime>
+		</value>
+	</Operation>
+
 	<!-- ========== Mortar Base ========== -->
 
 	<!-- Patch weapon -->
