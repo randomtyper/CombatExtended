@@ -4,6 +4,7 @@
 <Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Reich Armory [1.2]</li>
+			<li>Censored Armory [1.2]</li>
 		</mods>
 	<match Class="PatchOperationAdd">
 		<xpath>Defs</xpath>

@@ -3,7 +3,8 @@
 
 <Operation Class="PatchOperationFindMod">
 		<mods>
-			<li>Reich Armory [1.2]</li>
+      <li>Reich Armory [1.2]</li>
+      <li>Censored Armory [1.2]</li>
 		</mods>
 	<match Class="PatchOperationAdd">
 		<xpath>Defs</xpath>
@@ -160,9 +161,9 @@
 
   <RecipeDef ParentName="AmmoRecipeBase">
     <defName>MakeAmmo_75x714mmRShell_AP</defName>
-    <label>make 90mm AP cannon shells x5</label>
-    <description>Craft 5 90mm AP cannon shells.</description>
-    <jobString>Making 90mm AP cannon shells.</jobString>
+    <label>make 75mm AP cannon shells x5</label>
+    <description>Craft 5 75mm AP cannon shells.</description>
+    <jobString>Making 75mm AP cannon shells.</jobString>
     <workAmount>9800</workAmount>
     <ingredients>
       <li>
@@ -204,9 +205,9 @@
 
   <RecipeDef ParentName="AmmoRecipeBase">
     <defName>MakeAmmo_75x714mmRShell_HE</defName>
-    <label>make 90mm HE cannon shells x5</label>
-    <description>Craft 5 90mm HE cannon shells.</description>
-    <jobString>Making 90mm HE cannon shells.</jobString>
+    <label>make 75mm HE cannon shells x5</label>
+    <description>Craft 5 75mm HE cannon shells.</description>
+    <jobString>Making 75mm HE cannon shells.</jobString>
     <workAmount>9800</workAmount>
     <ingredients>
       <li>

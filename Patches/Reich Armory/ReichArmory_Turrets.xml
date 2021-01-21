@@ -4,6 +4,7 @@
 	<Operation Class="PatchOperationFindMod">
     <mods>
 		<li>Reich Armory [1.2]</li>
+		<li>Censored Armory [1.2]</li>
     </mods>
 		<match Class="PatchOperationSequence">
 		 <operations>
@@ -44,11 +45,6 @@
 			</li>
 
 			<!-- ========== Remove Vanilla Shells & Ammo & References ========== -->
-
-
-			<li Class="PatchOperationRemove">
-				<xpath>Defs/ThingDef[defName="Kar98K_Ammo_RA"]</xpath>
-			</li>
 
 			<li Class="PatchOperationRemove">
 				<xpath>Defs/ThingDef[defName="Shell_PaK_36_HE_RA"]</xpath>
