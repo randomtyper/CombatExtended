@@ -45,7 +45,7 @@ Mod |
 A Dog Said...	|
 Alpha Animals |
 Android Tiers	|
-Android Tiers++	|
+Android tiers - TX Series	|
 Androids	|
 Androids Expanded	|
 AnimalCollabProj	|
