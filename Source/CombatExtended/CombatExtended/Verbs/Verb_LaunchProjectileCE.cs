@@ -315,7 +315,7 @@ namespace CombatExtended
                     targetHeight = VerbPropsCE.ignorePartialLoSBlocker ? 0 : targetRange.Average;
                 }
                 if (projectilePropsCE.isInstant) {
-                    angleRadians += Mathf.Atan2((newTargetLoc - sourceLoc).magnitude, targetHeight - ShotHeight);
+		    angleRadians += Mathf.Atan2(targetHeight - ShotHeight, (newTargetLoc - sourceLoc).magnitude);
                 }
                 else {
                     angleRadians += ProjectileCE.GetShotAngle(ShotSpeed, (newTargetLoc - sourceLoc).magnitude, targetHeight - ShotHeight, Projectile.projectile.flyOverhead, projectilePropsCE.Gravity);
@@ -409,7 +409,11 @@ namespace CombatExtended
                 {
                     centerOfVisibleTarget = shooterHeight;
                 }
-                float wobble = Mathf.Asin(UnityEngine.Random.Range(shotHeight-centerOfVisibleTarget, centerOfVisibleTarget - shotHeight));
+		float distance = target.Thing.Position.DistanceTo(caster.Position);
+                // float wobble = Mathf.Atan2(UnityEngine.Random.Range(shotHeight-centerOfVisibleTarget, centerOfVisibleTarget - shotHeight), distance);
+		float triangleHeight = centerOfVisibleTarget - shotHeight;
+		float wobble = -Mathf.Atan2(triangleHeight, distance);
+		// TODO: Add inaccuracy for not standing in as natural a position
                 shotHeight = centerOfVisibleTarget;
                 return wobble;
             }
@@ -438,10 +442,17 @@ namespace CombatExtended
                 cover = null;
                 return false;
             }
-            for (int i = 0; i <= cells.Length / 2; i++)
+	    bool instant = false;
+	    if (Projectile.projectile is ProjectilePropertiesCE pprop)
+	    {
+		instant = pprop.isInstant;
+	    }
+	    int endCell = instant? cells.Length : cells.Length / 2;
+	    
+            for (int i = 0; i < endCell; i++)
             {
                 var cell = cells[i];
-
+		
                 if (cell.AdjacentTo8Way(caster.Position)) continue;
 
                 // Check for smoke
@@ -450,13 +461,13 @@ namespace CombatExtended
                 {
                     smokeDensity += gas.def.gas.accuracyPenalty;
                 }
-
+		
                 // Check for cover in the second half of LoS
-                if (i <= cells.Length / 2)
+                if (instant || i <= cells.Length / 2)
                 {
                     Pawn pawn = cell.GetFirstPawn(map);
                     Thing newCover = pawn == null ? cell.GetCover(map) : pawn;
-                    float newCoverHeight = new CollisionVertical(newCover).Max;
+		    float newCoverHeight = new CollisionVertical(newCover).Max;
 
                     // Cover check, if cell has cover compare collision height and get the highest piece of cover, ignore if cover is the target (e.g. solar panels, crashed ship, etc)
                     if (newCover != null
@@ -782,9 +793,12 @@ namespace CombatExtended
             if (verbProps.requireLineOfSight)
             {
                 // Calculate shot vector
-                Vector3 targetPos;
+		Vector3 targetPos;
                 if (targetThing != null)
                 {
+		    float shotHeight = shotSource.y;
+		    AdjustShotHeight(caster, targetThing, ref shotHeight);
+		    shotSource.y = shotHeight;
                     Vector3 targDrawPos = targetThing.DrawPos;
                     targetPos = new Vector3(targDrawPos.x, new CollisionVertical(targetThing).Max, targDrawPos.z);
                     var targPawn = targetThing as Pawn;

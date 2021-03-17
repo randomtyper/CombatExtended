@@ -390,7 +390,6 @@ namespace CombatExtended
             const float magicLaserDamageConstant = 1789.255934470907f;
             ProjectilePropertiesCE pprops = def.projectile as ProjectilePropertiesCE;
             shotRotation = Mathf.Deg2Rad * shotRotation + (float)(3.14159/2.0f);
-            shotAngle -= (float)(3.14159/2.0f);
             Vector3 direction = new Vector3(Mathf.Cos(shotRotation) * Mathf.Cos(shotAngle), Mathf.Sin(shotAngle), Mathf.Sin(shotRotation) * Mathf.Cos(shotAngle));
             Vector3 origin3 = new Vector3(origin.x, shotHeight, origin.y);
             Map map = launcher.Map;
