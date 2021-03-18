@@ -8,6 +8,7 @@ using Verse;
 using Verse.Sound;
 using CombatExtended.Compatibility;
 using CombatExtended.Lasers;
+using ProjectileImpactFX;
 
 namespace CombatExtended
 {
@@ -867,6 +868,21 @@ namespace CombatExtended
             {
                 ambientSustainer.Maintain();
             }
+
+	    if (def.HasModExtension<TrailerProjectileExtension>())
+	    {
+		var trailer = def.GetModExtension<TrailerProjectileExtension>();
+		if (trailer != null)
+		{
+		    if (ticksToImpact % trailer.trailerMoteInterval == 0)
+		    {
+			for (int i = 0; i < trailer.motesThrown; i++)
+                            {
+                                TrailThrower.ThrowSmoke(DrawPos, trailer.trailMoteSize, Map, trailer.trailMoteDef);
+                            }
+		    }
+		}
+	    }
         }
 
         /// <summary>
@@ -957,6 +973,15 @@ namespace CombatExtended
 
         protected virtual void Impact(Thing hitThing)
         {
+	    if (def.HasModExtension<EffectProjectileExtension>())
+	    {
+		def.GetModExtension<EffectProjectileExtension>()?.ThrowMote(ExactPosition,
+									    Map,
+									    def.projectile.damageDef.explosionCellMote,
+									    def.projectile.damageDef.explosionColorCenter,
+									    def.projectile.damageDef.soundExplosion,
+									    hitThing);
+	    }
             var ignoredThings = new List<Thing>();
 
             //Spawn things from preExplosionSpawnThingDef != null

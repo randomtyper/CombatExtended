@@ -113,71 +113,15 @@ namespace CombatExtended.Lasers
                     weapon = turret.Gun as IDrawnWeaponWithRotation;
                 }
             }
-            if (hitThing == null)
-            {
-                TriggerEffect(def.explosionEffect, b);
-                bool flag2 = this.def.causefireChance > 0f && Rand.Chance(this.def.causefireChance);
-                if (flag2)
-                {
-                    FireUtility.TryStartFireIn(b.ToIntVec3(), pawn.Map, 0.01f);
-                }
-            }
-            else
-            {
 
-                if (hitThing is Pawn && shielded)
-                {
-                //    weaponDamageMultiplier *= def.shieldDamageMultiplier;
-
-                    SpawnBeamReflections(muzzle, b, 5);
-                }
-
-                Rand.PushState();
-                bool flag2 = this.def.causefireChance > 0f && Rand.Chance(this.def.causefireChance);
-                Rand.PopState();
-                if (flag2)
-                {
-                    hitThing.TryAttachFire(0.01f);
-                }
-                TriggerEffect(def.explosionEffect, b, hitThing);
-            }
-            if (def.HediffToAdd!=null)
-            {
-                AddedEffect(hitThing);
-            }
-            Map map = base.Map;
-//            base.Impact(hitThing);
-            if (this.equipmentDef==null)
-            {
-                this.equipmentDef = this.launcher.def;
-            }
-            BattleLogEntry_RangedImpact battleLogEntry_RangedImpact = new BattleLogEntry_RangedImpact(this.launcher, hitThing, this.intendedTarget, this.equipmentDef, this.def, null);
-            Find.BattleLog.Add(battleLogEntry_RangedImpact);
-            if (hitThing != null)
-            {
-                DamageDef damageDef = this.def.projectile.damageDef;
-                float amount = DamageAmount;
-                float armorPenetration = ArmorPenetration;
-                float y = this.ExactRotation.eulerAngles.y;
-                Thing launcher = this.launcher;
-                ThingDef equipmentDef = this.equipmentDef;
-                DamageInfo dinfo = new DamageInfo(damageDef, amount, armorPenetration, y, launcher, null, equipmentDef, DamageInfo.SourceCategory.ThingOrUnknown, this.intendedTarget);
-                hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
-                Pawn hitPawn = hitThing as Pawn;
-                if (hitPawn != null && hitPawn.stances != null && hitPawn.BodySize <= this.def.projectile.StoppingPower + 0.001f)
-                {
-                    hitPawn.stances.StaggerFor(95);
-                }
-            }
-            else
-            {
-                SoundDefOf.BulletImpact_Ground.PlayOneShot(new TargetInfo(base.Position, map, false));
-                MoteMaker.MakeStaticMote(this.ExactPosition, map, ThingDefOf.Mote_ShotHit_Dirt, 1f);
-                if (base.Position.GetTerrain(map).takeSplashes)
-                {
-                    MoteMaker.MakeWaterSplash(this.ExactPosition, map, Mathf.Sqrt((float)this.def.projectile.GetDamageAmount(1f, null) * DamageModifier) * 1f, 4f);
-                }
-            }
+	    if (hitThing is Pawn && shielded)
+	    {
+	      //    weaponDamageMultiplier *= def.shieldDamageMultiplier;
+	      
+	      SpawnBeamReflections(muzzle, b, 5);
+	    }
+	    base.Impact(hitThing);
+            
         }
 
         public float DamageAmount

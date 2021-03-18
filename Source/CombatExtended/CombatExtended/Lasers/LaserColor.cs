@@ -45,44 +45,7 @@ namespace CombatExtended.Lasers
         public int index;
         public string name;
         public bool allowed = true;
-        /*
-        private static Thing FindClosestPrism(Pawn pawn)
-        {
-            return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(OGThingDefOf.RimlaserPrism), PathEndMode.InteractionCell, TraverseParms.For(pawn, pawn.NormalMaxDanger(), TraverseMode.ByPawn, false), 9999f, (Thing x) => !x.IsForbidden(pawn) && pawn.CanReserve(x, 1, -1, null, false), null, 0, -1, false, RegionType.Set_Passable, false);
-        }
-        */
-        /*
-        public static IEnumerable<FloatMenuOption> GetChangeBeamColorFloatMenuOptions(Thing gun, Pawn pawn)
-        {
-            Thing prism = FindClosestPrism(pawn);
-            if (prism == null) yield break;
-
-            int currentIndex=-1;
-            if (gun is IBeamColorThing) currentIndex = (gun as IBeamColorThing).BeamColor;
-
-            foreach (LaserColor color in colors)
-            {
-                if (!color.allowed) continue;
-                if (currentIndex == color.index) continue;
-
-                string caption = string.Format("RimlaserChangeBeamColor".Translate(), color.name.Translate());
-
-                Action action = delegate ()
-                {
-                    Job job = new Job(OGJobDefOf.OG_Job_ChangeLaserColor, gun, prism);
-                    job.count = 1;
-
-                    // we are storing color in an unrelated field because I have no idea how to approach this properly
-                    job.maxNumMeleeAttacks = color.index;
-
-                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-                };
-
-                yield return new FloatMenuOption(caption, action);
-            }
-
-            yield break;
-        }
-        */
+        
+        
     };
 }

@@ -14,7 +14,7 @@ using UnityEngine;
 namespace ProjectileImpactFX.HarmonyInstance
 {
 
-//    [HarmonyPatch(typeof(Verb), "TryCastNextBurstShot")]
+    [HarmonyPatch(typeof(Verb), "TryFindShootLineFromTo")]
     public static class Verb_TryCastNextBurstShot_MuzzlePosition_Transpiler
     {
 

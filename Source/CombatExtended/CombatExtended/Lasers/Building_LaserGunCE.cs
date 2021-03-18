@@ -14,7 +14,6 @@ namespace CombatExtended.Lasers
     // AdeptusMechanicus.Building_LaserGunCE
     public class Building_LaserGunCE : Building_TurretGunCE, IBeamColorThing
     {
-        CompPowerTrader power;
         public bool isCharged = false;
         public int previousBurstCooldownTicksLeft = 0;
 
@@ -60,8 +59,6 @@ namespace CombatExtended.Lasers
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-
-            power = GetComp<CompPowerTrader>();
         }
 
         public override void Tick()
@@ -95,10 +92,10 @@ namespace CombatExtended.Lasers
 
         public float AvailablePower()
         {
-            if (power.PowerNet == null) return 0;
+            if (powerComp.PowerNet == null) return 0;
 
             float availablePower = 0;
-            foreach (var battery in power.PowerNet.batteryComps)
+            foreach (var battery in powerComp.PowerNet.batteryComps)
             {
                 availablePower += battery.StoredEnergy;
             }
@@ -109,7 +106,7 @@ namespace CombatExtended.Lasers
             if (amount <= 0) return true;
             if (AvailablePower() < amount) return false;
 
-            foreach (var battery in power.PowerNet.batteryComps)
+            foreach (var battery in powerComp.PowerNet.batteryComps)
             {
                 var drain = battery.StoredEnergy > amount ? amount : battery.StoredEnergy;
                 battery.DrawPower(drain);

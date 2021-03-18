@@ -11,12 +11,12 @@ using Verse;
 namespace CombatExtended.Lasers
 {
     [HarmonyPatch(typeof(TurretTop), "DrawTurret", new Type[] { }), StaticConstructorOnStartup]
-    class OL_TuretTop_DrawTurret_LaserTurret_Patch
+    class Harmony_TuretTop_DrawTurret_LaserTurret_Patch
     {
         static FieldInfo parentTurretField;
         static FieldInfo curRotationIntField;
 
-        static OL_TuretTop_DrawTurret_LaserTurret_Patch()
+        static Harmony_TuretTop_DrawTurret_LaserTurret_Patch()
         {
             parentTurretField = typeof(TurretTop).GetField("parentTurret", BindingFlags.NonPublic | BindingFlags.Instance);
             curRotationIntField = typeof(TurretTop).GetField("curRotationInt", BindingFlags.NonPublic | BindingFlags.Instance);
